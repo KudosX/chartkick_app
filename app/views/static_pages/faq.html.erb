@@ -1,3 +1,13 @@
 <% provide(:title, 'FAQ') %>
-<h1>StaticPages#faq</h1>
-<p>Find me in app/views/static_pages/faq.html.erb</p>
+<h1>and The World</h1>
+
+<div class="row">
+
+  <!-- Geo Chart -->
+  <div class="col-xs-12">
+    <h3>Visits By Day</h3>
+    <%= geo_chart @visits.group(:country).count %>
+  </div>
+
+</div>
+

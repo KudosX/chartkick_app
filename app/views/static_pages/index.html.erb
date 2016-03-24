@@ -1,3 +1,30 @@
 <% provide(:title, 'Home') %>
-<h1>StaticPages#index</h1>
-<p>Find me in app/views/static_pages/index.html.erb</p>
+<h1>Admin Page</h1>
+<p>TimeLine using google charts and chartkick</p>
+
+<%= timeline [
+                 ["Washington", "1789-04-29", "1797-03-03"],
+                 ["Adams", "1797-03-03", "1801-03-03"],
+                 ["Jefferson", "1801-03-03", "1809-03-03"]
+             ] %>
+
+<h2> Line Charts</h2>
+<div class="row">
+
+  <!-- Line Chart - Single Series -->
+  <div class="col-xs-12">
+    <h3>Visits By Day</h3>
+    <%= line_chart @visits.group_by_day(:visited_at, format: "%B %d, %Y").count, discrete: true %>
+  </div>
+
+  <!-- Line Chart - Multiple Series -->
+  <div class="col-xs-12">
+    <h3>Visits By Country Per Day</h3>
+    <%= line_chart   Visit.pluck("country").uniq.map { |c| { name: c, data: @visits.where(country: c).group_by_day(:visited_at, format: "%B %d, %Y").count }  }, discrete: true %>
+  </div>
+
+</div>
+
+
+<h2>Pie this</h2>
+<%= pie_chart({"Football" => 10, "Basketball" => 5}) %>

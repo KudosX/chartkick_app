@@ -1,3 +1,41 @@
 <% provide(:title, 'About') %>
-<h1>StaticPages#about</h1>
+<h1>and More Charts</h1>
 <p>Find me in app/views/static_pages/about.html.erb</p>
+
+
+<div class="row">
+
+  <!-- Pie Chart -->
+  <div class="col-xs-9">
+    <h3>Total Visits by Country</h3>
+    <%= pie_chart @visits.group(:country).count %>
+  </div>
+
+</div>
+
+
+<!-- area chart -->
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Total Load Time By Day</h3>
+    <%= area_chart @visits.group_by_day(:visited_at).maximum(:load_time) %>
+  </div>
+</div>
+
+
+
+<div class="row">
+    <!-- Column Chart -->
+    <div class="col-xs-6">
+      <h3>Total Visits Per Country</h3>
+      <%= column_chart @visits.group(:country).count %>
+    </div>
+    <!-- Bar Chart -->
+    <div class="col-xs-6">
+      <h3>Total Visits Per Country</h3>
+      <%= bar_chart @visits.group(:country).count %>
+    </div>
+</div>
+
+
+
